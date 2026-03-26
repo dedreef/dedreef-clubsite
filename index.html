@@ -4,97 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SV OVERVECHT | Club Teams</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --dreef-blauw: #0d061a;
             --dreef-rood: #cc0000;
-            --achtergrond: #f4f7f9;
+            --achtergrond: #f0f2f5;
             --sidebar-breedte: 280px;
             --wit: #ffffff;
+            --trans-wit: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 30px rgba(0,0,0,0.08);
         }
 
-        body { font-family: 'Roboto', sans-serif; background: var(--achtergrond); margin: 0; display: flex; min-height: 100vh; color: #333; }
+        body { font-family: 'Poppins', sans-serif; background: var(--achtergrond); margin: 0; display: flex; min-height: 100vh; color: var(--dreef-blauw); }
 
-        /* SIDEBAR */
+        /* SIDEBAR UPGRADE */
         .sidebar {
             width: var(--sidebar-breedte);
-            background: var(--dreef-rood);
+            background: linear-gradient(180deg, var(--dreef-rood) 0%, #a00000 100%);
             color: white;
             position: fixed;
             top: 0; left: 0; bottom: 0;
-            border-right: 6px solid var(--dreef-blauw);
+            border-right: 5px solid var(--dreef-blauw);
             display: flex;
             flex-direction: column;
-            padding-top: 20px;
             z-index: 100;
             overflow-y: auto;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.1);
         }
 
-        .sidebar-header { text-align: center; margin-bottom: 20px; flex-shrink: 0; }
-        .sidebar-logo { width: 80px; margin-bottom: 10px; }
-        .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; text-transform: uppercase; color: var(--wit); line-height: 1.2; }
+        .sidebar-header { padding: 30px 20px; text-align: center; background: rgba(0,0,0,0.1); margin-bottom: 10px; }
+        .sidebar-logo { width: 90px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); }
+        .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
 
-        /* HOME KNOP */
+        /* HOME KNOP MODERN */
         .home-btn {
-            width: 100%; background: var(--wit); color: var(--dreef-blauw);
-            padding: 15px 20px; border: none; border-bottom: 4px solid var(--dreef-blauw);
+            width: 90%; margin: 10px auto; background: var(--wit); color: var(--dreef-blauw);
+            padding: 12px 20px; border: none; border-radius: 12px;
             text-align: left; font-family: 'Oswald', sans-serif; text-transform: uppercase;
-            cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;
-            transition: 0.3s; flex-shrink: 0;
+            cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; gap: 12px;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .home-btn:hover { background: var(--dreef-blauw); color: var(--wit); }
+        .home-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); background: var(--dreef-blauw); color: white; }
 
-        /* CATEGORIEËN */
+        /* CATEGORIEËN EN DROPDOWNS */
+        .sidebar-item { margin-bottom: 2px; }
         .category-btn {
-            width: 100%; background: var(--dreef-blauw); color: white;
-            padding: 12px 20px; border: none; border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: left; font-family: 'Oswald', sans-serif; text-transform: uppercase;
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            width: 100%; background: transparent; color: white;
+            padding: 15px 25px; border: none; text-align: left;
+            font-family: 'Oswald', sans-serif; text-transform: uppercase;
+            cursor: pointer; display: flex; justify-content: space-between; 
+            align-items: center; border-bottom: 1px solid var(--trans-wit);
+            transition: background 0.2s;
         }
+        .category-btn:hover { background: var(--trans-wit); }
 
         .team-group {
-            display: none;
-            background: rgba(0,0,0,0.1);
-            padding: 10px;
-            flex-wrap: wrap;
-            gap: 6px;
+            display: none; background: rgba(0,0,0,0.2); padding: 12px;
+            flex-wrap: wrap; gap: 8px; animation: slideDown 0.3s ease;
         }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         
         .sidebar-item:hover .team-group { display: flex; }
 
         .team-button {
-            flex: 1 1 calc(50% - 6px);
-            background: var(--wit); color: var(--dreef-blauw);
-            border: 1px solid var(--dreef-blauw); padding: 8px 2px;
+            flex: 1 1 calc(50% - 8px); background: rgba(255,255,255,0.05); color: white;
+            border: 1px solid var(--trans-wit); padding: 10px 5px;
             font-family: 'Oswald', sans-serif; font-size: 0.85rem;
-            text-transform: uppercase; border-radius: 4px; cursor: pointer;
-            text-align: center; transition: 0.2s;
+            text-transform: uppercase; border-radius: 8px; cursor: pointer;
+            transition: all 0.2s;
         }
-        .team-button:hover, .team-button.active { background: var(--dreef-blauw); color: var(--wit); }
+        .team-button:hover, .team-button.active { background: var(--wit); color: var(--dreef-blauw); font-weight: 700; transform: scale(1.03); }
 
-        /* CONTENT */
-        .main-content { margin-left: var(--sidebar-breedte); flex: 1; padding: 40px; }
-        .container { width: 100%; max-width: 900px; margin: 0 auto; }
+        /* MAIN CONTENT DESIGN */
+        .main-content { margin-left: var(--sidebar-breedte); flex: 1; padding: 50px; }
+        .container { width: 100%; max-width: 1000px; margin: 0 auto; }
         
         h1#active-team-name { 
-            font-family: 'Oswald', sans-serif; 
-            color: var(--dreef-blauw); 
-            text-transform: uppercase; 
-            border-bottom: 4px solid var(--dreef-rood); 
-            padding-bottom: 10px; 
-            margin-bottom: 30px; 
-            font-size: 3rem;
+            font-family: 'Oswald', sans-serif; color: var(--dreef-blauw); 
+            text-transform: uppercase; border-left: 8px solid var(--dreef-rood); 
+            padding-left: 20px; margin-bottom: 40px; font-size: 4rem;
+            line-height: 1; letter-spacing: -1px;
         }
         
-        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .card-header { background: var(--dreef-rood); color: white; padding: 15px; font-family: 'Oswald', sans-serif; text-align: center; text-transform: uppercase; }
-        .mededeling-box { padding: 25px; line-height: 1.6; font-size: 1.1rem; }
+        .card { 
+            background: white; border-radius: 24px; overflow: hidden; 
+            box-shadow: var(--shadow); margin-bottom: 35px; border: 1px solid rgba(0,0,0,0.03);
+        }
+        .card-header { 
+            background: var(--dreef-blauw); color: white; padding: 18px 25px; 
+            font-family: 'Oswald', sans-serif; text-align: left; 
+            text-transform: uppercase; font-size: 1.2rem; letter-spacing: 1px;
+            border-bottom: 4px solid var(--dreef-rood);
+        }
+        .mededeling-box { padding: 35px; line-height: 1.8; font-size: 1.15rem; color: #444; }
 
         @media (max-width: 900px) {
             body { flex-direction: column; }
-            .sidebar { position: relative; width: 100%; height: auto; border-right: none; }
-            .main-content { margin-left: 0; padding: 20px; }
+            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 5px solid var(--dreef-blauw); }
+            .main-content { margin-left: 0; padding: 25px; }
+            h1#active-team-name { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -103,29 +112,20 @@
     <nav class="sidebar">
         <div class="sidebar-header">
             <img src="logo.png" alt="Logo" class="sidebar-logo">
-            <div class="sidebar-title">SV OVERVECHT <br> DE DREEF</div>
+            <div class="sidebar-title">SV OVERVECHT</div>
         </div>
 
         <button class="home-btn" onclick="gaNaarHome()">🏠 HOME</button>
 
         <div class="sidebar-item">
-            <button class="category-btn">Mannen Zaterdag <span>▼</span></button>
+            <button class="category-btn">Mannen Zaterdag <span>+</span></button>
             <div class="team-group">
                 <button class="team-button" onclick="laadTeam(this)">Mannen 1</button>
             </div>
         </div>
 
         <div class="sidebar-item">
-            <button class="category-btn">Onder 16 & 15 <span>▼</span></button>
-            <div class="team-group">
-                <button class="team-button" onclick="laadTeam(this)">JO16-1</button>
-                <button class="team-button" onclick="laadTeam(this)">JO15-1</button>
-                <button class="team-button" onclick="laadTeam(this)">JO15-2JM</button>
-            </div>
-        </div>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Onder 14 <span>▼</span></button>
+            <button class="category-btn">Onder 14 <span>+</span></button>
             <div class="team-group">
                 <button class="team-button" onclick="laadTeam(this)">JO14-1</button>
                 <button class="team-button" onclick="laadTeam(this)">JO14-2</button>
@@ -134,18 +134,7 @@
         </div>
 
         <div class="sidebar-item">
-            <button class="category-btn">Onder 13 & 12 <span>▼</span></button>
-            <div class="team-group">
-                <button class="team-button" onclick="laadTeam(this)">JO13-1</button>
-                <button class="team-button" onclick="laadTeam(this)">JO13-2</button>
-                <button class="team-button" onclick="laadTeam(this)">JO12-1</button>
-                <button class="team-button" onclick="laadTeam(this)">JO12-2</button>
-                <button class="team-button" onclick="laadTeam(this)">JO12-3</button>
-            </div>
-        </div>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Onder 11 <span>▼</span></button>
+            <button class="category-btn">Onder 11 <span>+</span></button>
             <div class="team-group">
                 <button class="team-button" onclick="laadTeam(this)">JO11-1</button>
                 <button class="team-button" onclick="laadTeam(this)">JO11-2</button>
@@ -154,10 +143,9 @@
         </div>
 
         <div class="sidebar-item">
-            <button class="category-btn">Onder 10 t/m 7 <span>▼</span></button>
+            <button class="category-btn">Onder 10 t/m 7 <span>+</span></button>
             <div class="team-group">
                 <button class="team-button" onclick="laadTeam(this)">JO10-1</button>
-                <button class="team-button" onclick="laadTeam(this)">JO10-2</button>
                 <button class="team-button" onclick="laadTeam(this)">JO9-1</button>
                 <button class="team-button" onclick="laadTeam(this)">JO9-2</button>
                 <button class="team-button" onclick="laadTeam(this)">JO9-3</button>
@@ -173,10 +161,11 @@
     <main class="main-content">
         <div class="container">
             <h1 id="active-team-name">SV OVERVECHT</h1>
+            
             <div class="card">
-                <div class="card-header">Mededeling</div>
+                <div class="card-header">Laatste Update</div>
                 <div id="mededeling-box" class="mededeling-box">
-                    Welkom op de officiële clubsite. Kies een team voor standen en nieuws.
+                    Welkom op het nieuwe digitale hart van SV Overvecht De Dreef. Selecteer een team voor live updates en mededelingen.
                 </div>
             </div>
         </div>
@@ -194,7 +183,7 @@
             document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
             buttonElement.classList.add('active');
             document.getElementById('active-team-name').innerText = teamNaam;
-            document.getElementById('mededeling-box').innerHTML = "Informatie voor " + teamNaam + " volgt zodra de API is gekoppeld.";
+            document.getElementById('mededeling-box').innerHTML = "Hier komt straks de automatische data voor <strong>" + teamNaam + "</strong>.";
         }
 
         window.onload = gaNaarHome;
