@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.V. Overvecht De Dreef | Club Systeem</title>
+    <title>SV OVERVECHT | Club Teams</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        /* --- STYLING (Hetzelfde als je vorige site) --- */
         :root {
             --dreef-blauw: #0d061a;
             --dreef-rood: #cc0000;
             --achtergrond: #f4f7f9;
-            --sidebar-breedte: 260px;
+            --sidebar-breedte: 280px; /* Iets breder voor teamnamen */
             --wit: #ffffff;
         }
 
         body { font-family: 'Roboto', sans-serif; background: var(--achtergrond); margin: 0; display: flex; min-height: 100vh; color: #333; }
 
-        /* SIDEBAR */
+        /* SIDEBAR (NU MET TEAMS) */
         .sidebar {
             width: var(--sidebar-breedte);
             background: var(--dreef-rood);
@@ -28,37 +27,44 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 40px;
+            padding-top: 20px;
             z-index: 100;
+            overflow-y: auto; /* Scrollen als er veel teams zijn */
         }
 
-        .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-align: center; text-transform: uppercase; margin-bottom: 20px; }
+        /* LOGO BOVEN DE TEKST */
+        .sidebar-logo { width: 100px; margin-bottom: 10px; }
+        .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-align: center; text-transform: uppercase; margin-bottom: 20px; color: var(--wit); }
 
-        .nav-button {
-            width: 85%; background: var(--dreef-blauw); border: 2px solid rgba(255,255,255,0.2);
-            color: white; padding: 12px; margin: 5px 0; cursor: pointer;
-            font-family: 'Oswald', sans-serif; text-transform: uppercase; border-radius: 12px;
+        .team-button {
+            width: 90%; background: var(--dreef-blauw); border: 2px solid rgba(255,255,255,0.1);
+            color: white; padding: 10px; margin: 3px 0; cursor: pointer;
+            font-family: 'Oswald', sans-serif; text-transform: uppercase; border-radius: 8px;
+            text-align: left; font-size: 0.85rem; transition: 0.2s;
         }
+        .team-button:hover, .team-button.active { background: var(--wit); color: var(--dreef-blauw); border-color: var(--dreef-blauw); }
 
-        /* CONTENT */
-        .main-content { margin-left: var(--sidebar-breedte); flex: 1; padding: 40px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 900px; }
+        /* CONTENT AREA */
+        .main-content { margin-left: var(--sidebar-breedte); flex: 1; padding: 40px; }
+        .container { width: 100%; max-width: 900px; margin: 0 auto; }
 
-        .card { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .card-header { background: var(--dreef-rood); color: white; padding: 15px; font-family: 'Oswald', sans-serif; text-align: center; text-transform: uppercase; }
+        h1#active-team-name { font-family: 'Oswald', sans-serif; color: var(--dreef-blauw); text-transform: uppercase; border-bottom: 4px solid var(--dreef-rood); padding-bottom: 10px; margin-bottom: 30px; }
 
-        /* TABEL & TOPSCORERS */
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .card-header { background: var(--dreef-rood); color: white; padding: 15px; font-family: 'Oswald', sans-serif; text-align: center; text-transform: uppercase; font-size: 1.1rem; }
+
+        /* TABELLEN & LIJSTEN */
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { background: #f8f9fa; padding: 12px; text-align: left; border-bottom: 2px solid #eee; }
+        th { background: #f8f9fa; padding: 12px; text-align: left; color: var(--dreef-blauw); font-weight: 900; }
         td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
         tr.highlight { background-color: #fff0f0; font-weight: 900; }
 
-        .score-row { display: flex; justify-content: space-between; padding: 15px 25px; border-bottom: 1px solid #eee; font-weight: 700; }
+        .score-row { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #eee; font-weight: 700; }
         .score-row span:last-child { color: var(--dreef-rood); font-family: 'Oswald', sans-serif; }
 
         @media (max-width: 900px) {
             body { flex-direction: column; }
-            .sidebar { position: relative; width: 100%; height: auto; border-right: none; }
+            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 6px solid var(--dreef-blauw); }
             .main-content { margin-left: 0; padding: 20px 10px; }
         }
     </style>
@@ -66,118 +72,135 @@
 <body>
 
     <nav class="sidebar">
-        <div class="sidebar-title">S.V. OVERVECHT <br> DE DREEF</div>
-        <button class="nav-button" onclick="showPage('home')">Home</button>
-        <button class="nav-button" onclick="showPage('stand')">Stand & Teams</button>
-        <button class="nav-button" onclick="showPage('topscorers')">Topscorers</button>
-    </nav>
+        <img src="logo.png" alt="Logo" class="sidebar-logo">
+        <div class="sidebar-title">SV OVERVECHT <br> DE DREEF</div>
+        
+        <button class="team-button active" onclick="laadTeam('heren1')">Mannen 1 (Zat)</button>
+        <button class="team-button" onclick="laadTeam('jo161')">JO16-1</button>
+        <button class="team-button" onclick="laadTeam('jo151')">JO15-1</button>
+        <button class="team-button" onclick="laadTeam('jo152')">JO15-2JM</button>
+        <button class="team-button" onclick="laadTeam('jo141')">JO14-1</button>
+        <button class="team-button" onclick="laadTeam('jo142')">JO14-2 (Jouw Team)</button>
+        <button class="team-button" onclick="laadTeam('jo143')">JO14-3</button>
+        <button class="team-button" onclick="laadTeam('jo131')">JO13-1</button>
+        <button class="team-button" onclick="laadTeam('jo132')">JO13-2</button>
+        <button class="team-button" onclick="laadTeam('jo121')">JO12-1</button>
+        <button class="team-button" onclick="laadTeam('jo122')">JO12-2</button>
+        <button class="team-button" onclick="laadTeam('jo123')">JO12-3</button>
+        <button class="team-button" onclick="laadTeam('jo111')">JO11-1</button>
+        </nav>
 
     <main class="main-content">
         <div class="container">
+            <h1 id="active-team-name">Team Overzicht</h1>
 
-            <section id="home" class="page-section" style="display:block;">
-                <div class="card">
-                    <div class="card-header">Mededeling</div>
-                    <div id="mededeling-box" style="padding: 25px; line-height: 1.6;">
-                        </div>
-                </div>
-            </section>
-
-            <section id="stand" class="page-section" style="display:none;">
-                <div class="card">
-                    <div class="card-header">Ranglijst (Sorteert Automatisch)</div>
-                    <div style="overflow-x: auto;">
-                        <table>
-                            <thead>
-                                <tr><th>#</th><th>Team</th><th>G</th><th>W</th><th>P</th><th>+</th><th>-</th></tr>
-                            </thead>
-                            <tbody id="stand-tabel">
-                                </tbody>
-                        </table>
+            <div class="card">
+                <div class="card-header">Mededeling</div>
+                <div id="mededeling-box" style="padding: 20px; line-height: 1.6;">
                     </div>
-                </div>
-            </section>
+            </div>
 
-            <section id="topscorers" class="page-section" style="display:none;">
-                <div class="card">
-                    <div class="card-header">Topscorers Club</div>
-                    <div id="topscorers-lijst">
-                        </div>
+            <div class="card">
+                <div class="card-header">Ranglijst</div>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr><th>#</th><th>Team</th><th>G</th><th>W</th><th>P</th><th>+</th><th>-</th></tr>
+                        </thead>
+                        <tbody id="stand-tabel">
+                            </tbody>
+                    </table>
                 </div>
-            </section>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Topscorers</div>
+                <div id="topscorers-lijst">
+                    </div>
+            </div>
 
         </div>
     </main>
 
     <script>
         // ==========================================
-        // HIER PAS JE ALLES AAN (SUPER SIMPEL)
+        // DATA PER TEAM (VOORBEELDEN)
+        // Kopieer een blokje en verander de ID ('jo151') om een team toe te voegen
         // ==========================================
 
-        const MIJN_CLUB_DATA = {
-            // Pas hier de teams aan. De computer zet ze zelf op de juiste plek!
-            teams: [
-                { naam: "S.V. Overvecht De Dreef 14-2", g: 5, w: 4, p: 13, plus: 28, min: 7, isEigenTeam: true },
-                { naam: "Sporting '70 14-2", g: 6, w: 4, p: 13, plus: 30, min: 20, isEigenTeam: false },
-                { naam: "Saestum 14-1", g: 6, w: 3, p: 11, plus: 21, min: 19, isEigenTeam: false },
-                { naam: "Hercules 14-3", g: 5, w: 3, p: 10, plus: 20, min: 10, isEigenTeam: false }
-            ],
-
-            // Pas hier de topscorers aan
-            topscorers: [
-                { naam: "Mohammed K.", goals: 12 },
-                { naam: "Julian", goals: 8 },
-                { naam: "Yassin", goals: 5 }
-            ],
-
-            // Pas hier je mededeling aan
-            bericht: `
-                <strong>AANKOMEND ZATERDAG:</strong><br>
-                Beste ouders en jongens, we gaan weer strijden!<br><br>
-                🚩 1 vlagger nodig<br>
-                🚗 Rijders gezocht<br><br>
-                Groet, Trainer Julian 💪⚽
-            `
+        const TEAM_DATA = {
+            'heren1': {
+                naam: "Mannen 1 (Zaterdag)",
+                mededeling: "Grote derby deze zaterdag! Komt allen kijken.",
+                topscorers: [{naam: "Vleugelspits", goals: 15}, {naam: "Middenvelder", goals: 9}],
+                stand: [
+                    {naam: "SV Overvecht De Dreef 1", g: 10, w: 8, p: 25, plus: 40, min: 12, isEigen: true},
+                    {naam: "Tegenstander A", g: 10, w: 7, p: 22, plus: 30, min: 15}
+                ]
+            },
+            'jo161': {
+                naam: "JO16-1",
+                mededeling: "Verzamelen 1 uur voor de wedstrijd.",
+                topscorers: [{naam: "Spits JO16", goals: 10}, {naam: "Verdediger", goals: 3}],
+                stand: [
+                    {naam: "DOSC JO16-1", g: 8, w: 6, p: 19, plus: 25, min: 10},
+                    {naam: "SV Overvecht De Dreef JO16-1", g: 8, w: 5, p: 16, plus: 22, min: 14, isEigen: true}
+                ]
+            },
+            // DIT IS JOUW OUDE DATA, GEKOPPELD AAN JO14-2
+            'jo142': {
+                naam: "JO14-2",
+                mededeling: "<strong>AANKOMEND ZATERDAG:</strong><br>Beste ouders en jongens, we gaan weer strijden!<br><br>🚗 Rijders gezocht",
+                topscorers: [{naam: "Mohammed K.", goals: 12}, {naam: "Julian", goals: 8}],
+                stand: [
+                    {naam: "SV Overvecht De Dreef JO14-2", g: 5, w: 4, p: 13, plus: 28, min: 7, isEigen: true},
+                    {naam: "Sporting '70 JO14-2", g: 6, w: 4, p: 13, plus: 30, min: 20}
+                ]
+            }
+            // VOEG HIER TEAM_DATA VOOR jo151, jo152, enz. TOE
         };
 
         // ==========================================
-        // DE AUTOMATISCHE FUNCTIES (HOEF JE NIET AAN TE ZITTEN)
+        // DE FUNCTIES
         // ==========================================
 
-        function laadWebsite() {
-            // Sorteer teams op punten (p)
-            const gesorteerd = MIJN_CLUB_DATA.teams.sort((a, b) => b.p - a.p);
-            
-            const tabel = document.getElementById('stand-tabel');
-            tabel.innerHTML = '';
-            gesorteerd.forEach((t, i) => {
-                tabel.innerHTML += `
-                    <tr class="${t.isEigenTeam ? 'highlight' : ''}">
-                        <td>${i + 1}</td>
+        function laadTeam(teamId) {
+            const data = TEAM_DATA[teamId];
+            if (!data) return; // Team bestaat niet in data
+
+            // Update actieve knop
+            document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update Titels
+            document.getElementById('active-team-name').innerText = data.naam;
+
+            // Laad Mededeling
+            document.getElementById('mededeling-box').innerHTML = data.mededeling;
+
+            // Laad Stand (Automatisch Sorteren)
+            const tabelBody = document.getElementById('stand-tabel');
+            tabelBody.innerHTML = '';
+            data.stand.sort((a,b) => b.p - a.p).forEach((t, i) => {
+                tabelBody.innerHTML += `
+                    <tr class="${t.isEigen ? 'highlight' : ''}">
+                        <td>${i+1}</td>
                         <td>${t.naam}</td>
                         <td>${t.g}</td><td>${t.w}</td><td><strong>${t.p}</strong></td>
                         <td>${t.plus}</td><td>${t.min}</td>
                     </tr>`;
             });
 
-            // Laad topscorers
-            const lijst = document.getElementById('topscorers-lijst');
-            lijst.innerHTML = '';
-            MIJN_CLUB_DATA.topscorers.sort((a,b) => b.goals - a.goals).forEach((s, i) => {
-                lijst.innerHTML += `<div class="score-row"><span>${i+1}. ${s.naam}</span><span>${s.goals} goals</span></div>`;
+            // Laad Topscorers
+            const scoreLijst = document.getElementById('topscorers-lijst');
+            scoreLijst.innerHTML = '';
+            data.topscorers.sort((a,b) => b.goals - a.goals).forEach((s, i) => {
+                scoreLijst.innerHTML += `<div class="score-row"><span>${i+1}. ${s.naam}</span><span>${s.goals} goals</span></div>`;
             });
-
-            // Bericht
-            document.getElementById('mededeling-box').innerHTML = MIJN_CLUB_DATA.bericht;
         }
 
-        function showPage(id) {
-            document.querySelectorAll('.page-section').forEach(s => s.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-        }
-
-        // Starten
-        laadWebsite();
+        // Starten met het eerste team
+        laadTeam('heren1');
     </script>
 </body>
 </html>
