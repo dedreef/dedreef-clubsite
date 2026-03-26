@@ -10,37 +10,44 @@
             --dreef-blauw: #0d061a;
             --dreef-rood: #cc0000;
             --achtergrond: #f4f7f9;
-            --sidebar-breedte: 280px; /* Iets breder voor teamnamen */
+            --sidebar-breedte: 280px;
             --wit: #ffffff;
         }
 
         body { font-family: 'Roboto', sans-serif; background: var(--achtergrond); margin: 0; display: flex; min-height: 100vh; color: #333; }
 
-        /* SIDEBAR (NU MET TEAMS) */
+        /* SIDEBAR FIX: Scrollbaar gemaakt zodat teams niet afvallen */
         .sidebar {
             width: var(--sidebar-breedte);
             background: var(--dreef-rood);
             color: white;
             position: fixed;
-            height: 100%;
+            top: 0;
+            left: 0;
+            bottom: 0;
             border-right: 6px solid var(--dreef-blauw);
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-top: 20px;
             z-index: 100;
-            overflow-y: auto; /* Scrollen als er veel teams zijn */
+            overflow-y: auto; /* Zorgt ervoor dat je door de teams kunt scrollen */
+            scrollbar-width: thin;
+            scrollbar-color: var(--dreef-blauw) var(--dreef-rood);
         }
 
-        /* LOGO BOVEN DE TEKST */
-        .sidebar-logo { width: 100px; margin-bottom: 10px; }
-        .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-align: center; text-transform: uppercase; margin-bottom: 20px; color: var(--wit); }
+        /* Styling voor de scrollbalk in Chrome/Safari */
+        .sidebar::-webkit-scrollbar { width: 6px; }
+        .sidebar::-webkit-scrollbar-thumb { background-color: var(--dreef-blauw); border-radius: 10px; }
+
+        .sidebar-logo { width: 100px; margin-bottom: 10px; flex-shrink: 0; }
+        .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-align: center; text-transform: uppercase; margin-bottom: 20px; color: var(--wit); flex-shrink: 0; }
 
         .team-button {
             width: 90%; background: var(--dreef-blauw); border: 2px solid rgba(255,255,255,0.1);
             color: white; padding: 10px; margin: 3px 0; cursor: pointer;
             font-family: 'Oswald', sans-serif; text-transform: uppercase; border-radius: 8px;
-            text-align: left; font-size: 0.85rem; transition: 0.2s;
+            text-align: left; font-size: 0.85rem; transition: 0.2s; flex-shrink: 0;
         }
         .team-button:hover, .team-button.active { background: var(--wit); color: var(--dreef-blauw); border-color: var(--dreef-blauw); }
 
@@ -53,7 +60,6 @@
         .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
         .card-header { background: var(--dreef-rood); color: white; padding: 15px; font-family: 'Oswald', sans-serif; text-align: center; text-transform: uppercase; font-size: 1.1rem; }
 
-        /* TABELLEN & LIJSTEN */
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
         th { background: #f8f9fa; padding: 12px; text-align: left; color: var(--dreef-blauw); font-weight: 900; }
         td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
@@ -64,7 +70,7 @@
 
         @media (max-width: 900px) {
             body { flex-direction: column; }
-            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 6px solid var(--dreef-blauw); }
+            .sidebar { position: relative; width: 100%; height: 300px; border-right: none; border-bottom: 6px solid var(--dreef-blauw); }
             .main-content { margin-left: 0; padding: 20px 10px; }
         }
     </style>
@@ -80,7 +86,7 @@
         <button class="team-button" onclick="laadTeam('jo151')">JO15-1</button>
         <button class="team-button" onclick="laadTeam('jo152')">JO15-2JM</button>
         <button class="team-button" onclick="laadTeam('jo141')">JO14-1</button>
-        <button class="team-button" onclick="laadTeam('jo142')">JO14-2 (Jouw Team)</button>
+        <button class="team-button" onclick="laadTeam('jo142')">JO14-2</button>
         <button class="team-button" onclick="laadTeam('jo143')">JO14-3</button>
         <button class="team-button" onclick="laadTeam('jo131')">JO13-1</button>
         <button class="team-button" onclick="laadTeam('jo132')">JO13-2</button>
@@ -88,7 +94,9 @@
         <button class="team-button" onclick="laadTeam('jo122')">JO12-2</button>
         <button class="team-button" onclick="laadTeam('jo123')">JO12-3</button>
         <button class="team-button" onclick="laadTeam('jo111')">JO11-1</button>
-        </nav>
+        <button class="team-button" onclick="laadTeam('jo112')">JO11-2</button>
+        <button class="team-button" onclick="laadTeam('jo113')">JO11-3</button>
+    </nav>
 
     <main class="main-content">
         <div class="container">
@@ -96,8 +104,7 @@
 
             <div class="card">
                 <div class="card-header">Mededeling</div>
-                <div id="mededeling-box" style="padding: 20px; line-height: 1.6;">
-                    </div>
+                <div id="mededeling-box" style="padding: 20px; line-height: 1.6;"></div>
             </div>
 
             <div class="card">
@@ -107,99 +114,68 @@
                         <thead>
                             <tr><th>#</th><th>Team</th><th>G</th><th>W</th><th>P</th><th>+</th><th>-</th></tr>
                         </thead>
-                        <tbody id="stand-tabel">
-                            </tbody>
+                        <tbody id="stand-tabel"></tbody>
                     </table>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header">Topscorers</div>
-                <div id="topscorers-lijst">
-                    </div>
+                <div id="topscorers-lijst"></div>
             </div>
-
         </div>
     </main>
 
     <script>
-        // ==========================================
-        // DATA PER TEAM (VOORBEELDEN)
-        // Kopieer een blokje en verander de ID ('jo151') om een team toe te voegen
-        // ==========================================
-
         const TEAM_DATA = {
             'heren1': {
                 naam: "Mannen 1 (Zaterdag)",
                 mededeling: "Grote derby deze zaterdag! Komt allen kijken.",
-                topscorers: [{naam: "Vleugelspits", goals: 15}, {naam: "Middenvelder", goals: 9}],
-                stand: [
-                    {naam: "SV Overvecht De Dreef 1", g: 10, w: 8, p: 25, plus: 40, min: 12, isEigen: true},
-                    {naam: "Tegenstander A", g: 10, w: 7, p: 22, plus: 30, min: 15}
-                ]
+                topscorers: [{naam: "Speler 1", goals: 15}],
+                stand: [{naam: "SV Overvecht De Dreef 1", g: 10, w: 8, p: 25, plus: 40, min: 12, isEigen: true}]
             },
-            'jo161': {
-                naam: "JO16-1",
-                mededeling: "Verzamelen 1 uur voor de wedstrijd.",
-                topscorers: [{naam: "Spits JO16", goals: 10}, {naam: "Verdediger", goals: 3}],
-                stand: [
-                    {naam: "DOSC JO16-1", g: 8, w: 6, p: 19, plus: 25, min: 10},
-                    {naam: "SV Overvecht De Dreef JO16-1", g: 8, w: 5, p: 16, plus: 22, min: 14, isEigen: true}
-                ]
-            },
-            // DIT IS JOUW OUDE DATA, GEKOPPELD AAN JO14-2
             'jo142': {
                 naam: "JO14-2",
-                mededeling: "<strong>AANKOMEND ZATERDAG:</strong><br>Beste ouders en jongens, we gaan weer strijden!<br><br>🚗 Rijders gezocht",
+                mededeling: "<strong>AANKOMEND ZATERDAG:</strong><br>Uitwedstrijd DVSU JO14-2. Verzamelen om 08:00 bij De Dreef.",
                 topscorers: [{naam: "Mohammed K.", goals: 12}, {naam: "Julian", goals: 8}],
                 stand: [
                     {naam: "SV Overvecht De Dreef JO14-2", g: 5, w: 4, p: 13, plus: 28, min: 7, isEigen: true},
                     {naam: "Sporting '70 JO14-2", g: 6, w: 4, p: 13, plus: 30, min: 20}
                 ]
             }
-            // VOEG HIER TEAM_DATA VOOR jo151, jo152, enz. TOE
         };
 
-        // ==========================================
-        // DE FUNCTIES
-        // ==========================================
-
         function laadTeam(teamId) {
-            const data = TEAM_DATA[teamId];
-            if (!data) return; // Team bestaat niet in data
+            const data = TEAM_DATA[teamId] || { 
+                naam: teamId.toUpperCase(), 
+                mededeling: "Nog geen mededelingen voor dit team.", 
+                topscorers: [], 
+                stand: [] 
+            };
 
-            // Update actieve knop
             document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if(event) event.target.classList.add('active');
 
-            // Update Titels
             document.getElementById('active-team-name').innerText = data.naam;
-
-            // Laad Mededeling
             document.getElementById('mededeling-box').innerHTML = data.mededeling;
 
-            // Laad Stand (Automatisch Sorteren)
             const tabelBody = document.getElementById('stand-tabel');
             tabelBody.innerHTML = '';
             data.stand.sort((a,b) => b.p - a.p).forEach((t, i) => {
                 tabelBody.innerHTML += `
                     <tr class="${t.isEigen ? 'highlight' : ''}">
-                        <td>${i+1}</td>
-                        <td>${t.naam}</td>
-                        <td>${t.g}</td><td>${t.w}</td><td><strong>${t.p}</strong></td>
-                        <td>${t.plus}</td><td>${t.min}</td>
+                        <td>${i+1}</td><td>${t.naam}</td><td>${t.g}</td><td>${t.w}</td>
+                        <td><strong>${t.p}</strong></td><td>${t.plus}</td><td>${t.min}</td>
                     </tr>`;
             });
 
-            // Laad Topscorers
             const scoreLijst = document.getElementById('topscorers-lijst');
-            scoreLijst.innerHTML = '';
+            scoreLijst.innerHTML = data.topscorers.length ? '' : '<div style="padding:20px; color:#999;">Geen topscorers bekend.</div>';
             data.topscorers.sort((a,b) => b.goals - a.goals).forEach((s, i) => {
                 scoreLijst.innerHTML += `<div class="score-row"><span>${i+1}. ${s.naam}</span><span>${s.goals} goals</span></div>`;
             });
         }
 
-        // Starten met het eerste team
         laadTeam('heren1');
     </script>
 </body>
