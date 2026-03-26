@@ -35,16 +35,17 @@
         .sidebar-logo { width: 80px; margin-bottom: 10px; }
         .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; text-transform: uppercase; color: var(--wit); line-height: 1.2; }
 
-        /* HOME KNOP STYLING */
+        /* HOME KNOP */
         .home-btn {
             width: 100%; background: var(--wit); color: var(--dreef-blauw);
             padding: 15px 20px; border: none; border-bottom: 4px solid var(--dreef-blauw);
             text-align: left; font-family: 'Oswald', sans-serif; text-transform: uppercase;
             cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;
-            transition: 0.3s;
+            transition: 0.3s; flex-shrink: 0;
         }
         .home-btn:hover { background: var(--dreef-blauw); color: var(--wit); }
 
+        /* CATEGORIEËN */
         .category-btn {
             width: 100%; background: var(--dreef-blauw); color: white;
             padding: 12px 20px; border: none; border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -62,6 +63,7 @@
         
         .sidebar-item:hover .team-group { display: flex; }
 
+        /* KLEINE KNOPPEN NAAST ELKAAR */
         .team-button {
             flex: 1 1 calc(50% - 6px);
             background: var(--wit); color: var(--dreef-blauw);
@@ -72,7 +74,7 @@
         }
         .team-button:hover, .team-button.active { background: var(--dreef-blauw); color: var(--wit); }
 
-        /* CONTENT */
+        /* CONTENT AREA */
         .main-content { margin-left: var(--sidebar-breedte); flex: 1; padding: 40px; }
         .container { width: 100%; max-width: 900px; margin: 0 auto; }
         
@@ -115,24 +117,67 @@
         </div>
 
         <div class="sidebar-item">
+            <button class="category-btn">Onder 16 & 15 <span>▼</span></button>
+            <div class="team-group">
+                <button class="team-button" onclick="laadTeam(this)">JO16-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO15-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO15-2JM</button>
+            </div>
+        </div>
+
+        <div class="sidebar-item">
             <button class="category-btn">Onder 14 <span>▼</span></button>
             <div class="team-group">
                 <button class="team-button" onclick="laadTeam(this)">JO14-1</button>
                 <button class="team-button" onclick="laadTeam(this)">JO14-2</button>
+                <button class="team-button" onclick="laadTeam(this)">JO14-3</button>
             </div>
         </div>
-        </nav>
+
+        <div class="sidebar-item">
+            <button class="category-btn">Onder 13 & 12 <span>▼</span></button>
+            <div class="team-group">
+                <button class="team-button" onclick="laadTeam(this)">JO13-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO13-2</button>
+                <button class="team-button" onclick="laadTeam(this)">JO12-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO12-2</button>
+                <button class="team-button" onclick="laadTeam(this)">JO12-3</button>
+            </div>
+        </div>
+
+        <div class="sidebar-item">
+            <button class="category-btn">Onder 11 <span>▼</span></button>
+            <div class="team-group">
+                <button class="team-button" onclick="laadTeam(this)">JO11-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO11-2</button>
+                <button class="team-button" onclick="laadTeam(this)">JO11-3</button>
+                <button class="team-button" onclick="laadTeam(this)">JO11-4</button>
+                <button class="team-button" onclick="laadTeam(this)">JO11-5</button>
+            </div>
+        </div>
+
+        <div class="sidebar-item">
+            <button class="category-btn">Onder 10 t/m 7 <span>▼</span></button>
+            <div class="team-group">
+                <button class="team-button" onclick="laadTeam(this)">JO10-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO10-2</button>
+                <button class="team-button" onclick="laadTeam(this)">JO9-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO9-2</button>
+                <button class="team-button" onclick="laadTeam(this)">JO8-1</button>
+                <button class="team-button" onclick="laadTeam(this)">JO7-1</button>
+            </div>
+        </div>
+
+    </nav>
 
     <main class="main-content">
         <div class="container">
             <h1 id="active-team-name">Welkom</h1>
             
             <div class="card">
-                <div id="home-content">
-                    <div class="card-header">Club Nieuws</div>
-                    <div id="mededeling-box" class="mededeling-box">
-                        Selecteer een team in de lijst voor specifieke informatie of bekijk hier het laatste nieuws van SV Overvecht De Dreef.
-                    </div>
+                <div class="card-header">Club Nieuws</div>
+                <div id="mededeling-box" class="mededeling-box">
+                    Welkom op de nieuwe clubsite van SV Overvecht De Dreef! Selecteer een team aan de linkerkant voor standen en info.
                 </div>
             </div>
         </div>
@@ -140,7 +185,7 @@
 
     <script>
         const TEAM_DATA = {
-            'JO14-2': { mededeling: "<strong>ZATERDAG:</strong> Verzamelen 08:00." }
+            'JO14-2': { mededeling: "<strong>ZATERDAG:</strong> Verzamelen 08:00 bij De Dreef." }
         };
 
         function gaNaarHome() {
@@ -153,6 +198,8 @@
             const teamNaam = buttonElement.innerText;
             document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
             buttonElement.classList.add('active');
+            
+            // TITEL FIX: Pakt direct de tekst van de knop
             document.getElementById('active-team-name').innerText = teamNaam;
 
             const data = TEAM_DATA[teamNaam] || { 
