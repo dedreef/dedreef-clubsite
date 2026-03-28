@@ -193,37 +193,74 @@
     </main>
 
     <script>
-        // DE VOLLEDIGE, MOOIE HOMEPAGE CONTENT IS TERUG
-        const homeContent = `
-            <h1 id="active-team-name">SV OVERVECHT</h1>
-            <div class="home-grid">
-                <div class="left-col">
-                    <div class="card">
-                        <div class="card-header">Over Onze Club</div>
-                        <div class="card-body">
-                            Welkom bij SV Overvecht De Dreef. Wij zijn meer dan alleen een voetbalclub; wij zijn een gemeenschap. 
-                            Op deze site vind je alle informatie over onze teams, evenementen en het laatste nieuws.
-                            <br><br>
-                            <i>Website onder constructie.</i>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">Club Activiteiten 2026</div>
-                        <div class="card-body">
-                            <div class="activity-item"><div class="date-badge">12<br>APR</div><div><strong>Paas-Toernooi Jeugd</strong></div></div>
-                            <div class="activity-item"><div class="date-badge">20<br>JUN</div><div><strong>Eind-BBQ Seizoen</strong></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-col">
-                    <div class="newsletter-box">
-                        <h2 style="font-family:'Oswald'; margin-top:0;">NIEUWSBRIEF</h2>
-                        <input type="email" placeholder="Je e-mailadres">
-                        <button class="newsletter-btn">Aanmelden</button>
-                    </div>
+const homeContent = `
+    <h1 id="active-team-name">SV OVERVECHT / DE DREEF</h1>
+    
+    <div class="home-grid">
+        
+        <div class="left-col">
+            
+            <div class="card">
+                <div class="card-header">Over Onze Club</div>
+                <div class="card-body">
+                    <p style="font-size: 1.15rem; margin-top: 0;">Welkom bij SV Overvecht De Dreef.</p>
+                    <p>Wij zijn meer dan alleen een voetbalclub; wij zijn een gemeenschap gericht op sportiviteit, plezier en ontwikkeling. Op deze site vind je alle informatie over onze teams, evenementen en het laatste nieuws. Of je nu speler, coach, vrijwilliger of supporter bent: je bent van harte welkom!</p>
+                    <p style="margin-bottom: 0;"><strong>Huidige status:</strong> De volledige integratie met wedstrijdprogramma's volgt binnenkort.</p>
                 </div>
             </div>
-        `;
+
+            <div class="card">
+                <div class="card-header">Club Activiteiten 2026</div>
+                <div class="card-body">
+                    
+                    <div class="activity-item">
+                        <div class="date-badge">12<br>APR</div>
+                        <div>
+                            <strong>Paas-Toernooi Jeugd</strong><br>
+                            Groot toernooi voor alle O7 t/m O13 teams.
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="date-badge">30<br>MEI</div>
+                        <div>
+                            <strong>Vrijwilligers Avond</strong><br>
+                            Bedankavond voor alle coaches en hulptrainers.
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+                        <div class="date-badge">20<br>JUN</div>
+                        <div>
+                            <strong>Eind-BBQ Seizoen</strong><br>
+                            Gezellige afsluiting met de hele club.
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div> <div class="right-col">
+            
+            <div class="newsletter-box">
+                <h2 style="font-family:'Oswald'; margin-top:0; color: white;">NIEUWSBRIEF</h2>
+                <p>Blijf op de hoogte van clubnieuws, evenementen en afgelastingen.</p>
+                <form onsubmit="return false;">
+                    <input type="email" placeholder="Je e-mailadres" style="width: 100%;">
+                    <button class="newsletter-btn" style="width: 100%;">Aanmelden</button>
+                </form>
+            </div>
+            
+            <div class="card" style="margin-top:30px;">
+                <div class="card-header" style="background:var(--dreef-rood); text-align: center;">HELP DE CLUB</div>
+                <div class="card-body" style="font-size:1.05rem;">
+                    We zijn een vrijwilligersclub. Wij zoeken altijd naar enthousiaste scheidsrechters en kantine-medewerkers. Help jij ook mee?
+                    <br><br>
+                    <strong>Meld je aan bij het bestuur!</strong>
+                </div>
+            </div>
+            
+        </div> </div> `;
 
         function gaNaarHome() {
             document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
