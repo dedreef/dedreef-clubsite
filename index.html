@@ -215,32 +215,92 @@
             }
         }
 
-        const homeContent = `
-            <h1 id="active-team-name">SV OVERVECHT</h1>
-            <div class="home-grid">
-                <div class="left-col">
-                    <div class="card">
-                        <div class="card-header">Over Onze Club</div>
-                        <div class="card-body">Welkom bij SV Overvecht De Dreef. Wij zijn een gemeenschap gericht op sportiviteit en plezier.</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">Club Activiteiten 2026</div>
-                        <div class="card-body">
-                            <div class="activity-item"><div class="date-badge">12<br>APR</div><div><strong>Paas-Toernooi Jeugd</strong></div></div>
-                            <div class="activity-item"><div class="date-badge">20<br>JUN</div><div><strong>Eind-BBQ Seizoen</strong></div></div>
+const homeContent = `
+    <h1 id="active-team-name">SV OVERVECHT DE DREEF</h1>
+    <div class="home-grid">
+        <div class="left-col">
+            <div class="card">
+                <div class="card-header">WELKOM BIJ ONZE CLUB</div>
+                <div class="card-body">
+                    <p style="font-size: 1.2rem; font-weight: 600; margin-top: 0;">Samen sterker in Overvecht!</p>
+                    <p>SV Overvecht De Dreef is een levendige voetbalvereniging in het hart van Utrecht. Wij bieden een plek aan jong en oud om op een plezierige en sportieve manier met de voetbalsport bezig te zijn. Onze club staat bekend om de familiale sfeer en de passie voor het spel.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">WAAR WIJ VOOR STAAN</div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <strong style="display:block; color: var(--dreef-rood); margin-bottom: 5px;">Respect</strong>
+                            Op en rond het veld behandelen we elkaar, de tegenstander en de scheidsrechter met respect.
+                        </div>
+                        <div>
+                            <strong style="display:block; color: var(--dreef-rood); margin-bottom: 5px;">Plezier</strong>
+                            Voetbal is een spel; het plezier van onze leden staat altijd voorop.
+                        </div>
+                        <div>
+                            <strong style="display:block; color: var(--dreef-rood); margin-bottom: 5px;">Ontwikkeling</strong>
+                            Wij investeren in de groei van onze spelers, zowel sportief als sociaal.
+                        </div>
+                        <div>
+                            <strong style="display:block; color: var(--dreef-rood); margin-bottom: 5px;">Samenwerking</strong>
+                            Vrijwilligers, ouders en spelers vormen samen de kracht van onze club.
                         </div>
                     </div>
                 </div>
-                <div class="right-col">
-                    <div class="newsletter-box">
-                        <h2>NIEUWSBRIEF</h2>
-                        <input type="email" placeholder="Je e-mailadres">
-                        <button class="newsletter-btn">Aanmelden</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">CLUB ACTIVITEITEN 2026</div>
+                <div class="card-body">
+                    <div class="activity-item">
+                        <div class="date-badge">12<br>APR</div>
+                        <div><strong>Groot Paas-Toernooi</strong><br>Een sportieve dag voor de hele buurt met muziek en snacks.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="date-badge">30<br>MEI</div>
+                        <div><strong>Vrijwilligers Bedankavond</strong><br>Zonder onze vrijwilligers geen club. Een avond vol waardering.</div>
+                    </div>
+                    <div class="activity-item" style="border-bottom: none; margin-bottom: 0;">
+                        <div class="date-badge">20<br>JUN</div>
+                        <div><strong>Eind-BBQ & Familie-dag</strong><br>De gezamenlijke afsluiting van het voetbalseizoen.</div>
                     </div>
                 </div>
             </div>
-        `;
+        </div>
 
+        <div class="right-col">
+            <div class="newsletter-box">
+                <h2 style="margin-top:0;">NIEUWSBRIEF</h2>
+                <p>Ontvang het laatste nieuws en belangrijke meldingen direct in je mailbox.</p>
+                <input type="email" placeholder="Je e-mailadres">
+                <button class="newsletter-btn">Aanmelden</button>
+            </div>
+
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-header" style="background: var(--dreef-rood);">DE KANTINE</div>
+                <div class="card-body" style="font-size: 0.95rem;">
+                    <p>Onze kantine is het kloppend hart van de vereniging. Kom langs voor een bakje koffie of een hapje na de wedstrijd!</p>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                    <strong>Openingstijden:</strong><br>
+                    Ma t/m Vr: 18:30 - 22:00<br>
+                    Zaterdag: 08:00 - 18:00<br>
+                    Zondag: Gesloten
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">HELP DE CLUB</div>
+                <div class="card-body" style="text-align: center;">
+                    <p>Wij zoeken nog scheidsrechters en trainers!</p>
+                    <button style="background: var(--dreef-blauw); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; width: 100%;">MELD JE AAN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+        
         function gaNaarHome() {
             document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
             document.getElementById('main-container').innerHTML = homeContent;
