@@ -3,254 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SV OVERVECHT DE DREEF | Clubsite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <title>Coach Tactiekbord | SV Overvecht De Dreef</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
+            --gras: #2e7d32;
+            --lijn: rgba(255,255,255,0.8);
             --dreef-blauw: #0d061a;
             --dreef-rood: #cc0000;
-            --achtergrond: #f0f2f5;
-            --sidebar-breedte: 280px;
-            --wit: #ffffff;
-            --trans-wit: rgba(255, 255, 255, 0.1);
-            --shadow: 0 8px 30px rgba(0,0,0,0.12);
         }
-
-        * { font-family: 'Poppins', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
-
-        body { background: var(--achtergrond); display: flex; min-height: 100vh; color: var(--dreef-blauw); overflow-x: hidden; }
-
-        /* MOBIELE HEADER */
-        .mobile-header {
-            display: none; position: fixed; top: 0; left: 0; right: 0; height: 60px;
-            background: var(--dreef-rood); color: white; align-items: center;
-            justify-content: space-between; padding: 0 20px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .menu-toggle { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; font-weight: 800; }
-
-        /* SIDEBAR */
-        .sidebar {
-            width: var(--sidebar-breedte); background: linear-gradient(180deg, var(--dreef-rood) 0%, #a00000 100%);
-            color: white; position: fixed; top: 0; left: 0; bottom: 0; border-right: 6px solid var(--dreef-blauw);
-            display: flex; flex-direction: column; z-index: 1100; overflow-y: auto; transition: transform 0.3s ease;
-        }
-
-        .sidebar-header { padding: 30px 20px; text-align: center; background: rgba(0,0,0,0.15); flex-shrink: 0; }
-        .sidebar-logo { width: 100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); }
-        .sidebar-title { font-size: 1.5rem; text-transform: uppercase; font-weight: 800; color: var(--wit); margin-top: 15px; line-height: 1.1; }
-
-        /* DE NIEUWE SUBTIELE SPORT HOME KNOP */
-        .home-btn {
-            display: flex; justify-content: center; align-items: center; width: 90%; margin: 15px auto; height: 50px;
-            background: transparent; color: var(--wit); border: 2px solid var(--wit); border-radius: 12px;
-            cursor: pointer; font-size: 1.5rem; font-weight: 800; text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .home-btn:hover {
-            background: var(--wit);
-            color: var(--dreef-blauw);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .category-btn {
-            width: 100%; background: transparent; color: white; padding: 15px 25px; border: none; text-align: left;
-            font-weight: 600; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; 
-            align-items: center; border-bottom: 1px solid var(--trans-wit); font-size: 1.05rem;
-        }
-
-        .team-group { display: none; background: rgba(0,0,0,0.25); padding: 12px; flex-wrap: wrap; gap: 8px; }
-        .sidebar-item:hover .team-group { display: flex; }
-
-        .team-button {
-            flex: 1 1 calc(50% - 8px); background: rgba(255,255,255,0.08); color: white; border: 1px solid var(--trans-wit);
-            padding: 10px 5px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; border-radius: 8px; cursor: pointer;
-        }
-
-        /* MAIN CONTENT */
-        .main-content { margin-left: var(--sidebar-breedte); flex: 1; padding: 60px; transition: filter 0.3s; }
-        .container { width: 100%; max-width: 1000px; margin: 0 auto; }
+        * { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+        body { background: #1a1a1a; color: white; display: flex; height: 100vh; overflow: hidden; }
         
-        h1#active-team-name { 
-            color: var(--dreef-blauw); text-transform: uppercase; border-left: 12px solid var(--dreef-rood); 
-            padding-left: 30px; margin-bottom: 45px; font-size: 4.5rem; line-height: 0.9; font-weight: 900;
-        }
+        /* ZIJBALK */
+        .sidebar { width: 300px; background: #222; padding: 20px; display: flex; flex-direction: column; gap: 15px; border-right: 2px solid #444; }
+        h2 { font-weight: 800; font-size: 1.2rem; color: #fff; text-transform: uppercase; }
+        .btn { background: var(--dreef-rood); color: white; border: none; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; width: 100%; transition: 0.2s; }
+        .btn:hover { background: #ff1a1a; }
+        .btn-secondary { background: #444; }
+        .btn-secondary:hover { background: #555; }
+        select, input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #444; background: #333; color: white; }
         
-        .home-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
-        .card { background: white; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 30px; }
+        /* HET VELD */
+        .field-container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; }
+        .field { width: 100%; height: 100%; max-width: 900px; max-height: 600px; background: var(--gras); border: 4px solid var(--lijn); position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        .card-header { background: var(--dreef-blauw); color: white; padding: 20px 30px; font-weight: 800; text-transform: uppercase; border-bottom: 5px solid var(--dreef-rood); margin: 0; }
-        .card-body { padding: 30px; line-height: 1.6; font-size: 1.1rem; color: #333; }
-        .card-body p { margin-top: 0; margin-bottom: 15px; }
-
-        .activity-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-        .date-badge { background: var(--dreef-rood); color: white; padding: 10px; border-radius: 12px; min-width: 60px; text-align: center; font-weight: 800; }
-
-        .newsletter-box { background: var(--dreef-blauw); color: white; padding: 30px; border-radius: 24px; text-align: center; }
-        .newsletter-box h2 { font-weight: 800; margin-bottom: 10px; }
-        .newsletter-box p { margin-top: 0; margin-bottom: 15px; }
-        .newsletter-box input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: none; }
-        .newsletter-btn { background: var(--dreef-rood); color: white; padding: 12px; border-radius: 8px; font-weight: 800; text-transform: uppercase; cursor: pointer; width: 100%; border: none; }
-
-        @media (max-width: 1024px) {
-            .mobile-header { display: flex; }
-            .sidebar { transform: translateX(-100%); width: 85%; max-width: 320px; }
-            .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 80px 20px 20px 20px; }
-            .home-grid { grid-template-columns: 1fr; }
-            h1#active-team-name { font-size: 2.5rem; padding-left: 15px; border-left-width: 8px; }
-            .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1050; }
-            .sidebar-overlay.show { display: block; }
-        }
+        /* BELIJNING */
+        .center-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--lijn); }
+        .center-circle { position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; border: 2px solid var(--lijn); border-radius: 50%; transform: translate(-50%, -50%); }
+        .penalty-area-left { position: absolute; left: 0; top: 25%; width: 15%; height: 50%; border: 2px solid var(--lijn); border-left: none; }
+        .penalty-area-right { position: absolute; right: 0; top: 25%; width: 15%; height: 50%; border: 2px solid var(--lijn); border-right: none; }
+        
+        /* SPELERS */
+        .player { width: 35px; height: 35px; border-radius: 50%; position: absolute; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 0.8rem; cursor: move; user-select: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid white; color: white; }
+        .team-a { background: var(--dreef-rood); }
+        .team-b { background: #0055ff; }
+        .player-label { position: absolute; bottom: -18px; font-size: 0.65rem; white-space: nowrap; background: rgba(0,0,0,0.7); padding: 1px 5px; border-radius: 3px; font-weight: 400; }
+        
+        /* CANVAS VOOR LIJNEN */
+        canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
     </style>
 </head>
 <body>
 
-    <div class="mobile-header">
-        <button class="menu-toggle" onclick="toggleMenu()">☰ MENU</button>
-        <span style="font-weight: 800; font-size: 0.9rem;">SV OVERVECHT DE DREEF</span>
+    <div class="sidebar">
+        <h2>📋 Tactiekbord</h2>
+        <p style="font-size: 0.8rem; color: #aaa;">Sleep de spelers over het veld.</p>
+        
+        <hr style="border-color: #444;">
+        
+        <h2>💾 Opslaan</h2>
+        <input type="text" id="tactic-name" placeholder="Naam van tactiek...">
+        <button class="btn" onclick="saveTactic()">Sla Frame Op</button>
+        
+        <hr style="border-color: #444;">
+        
+        <h2>⏱️ Replay</h2>
+        <select id="saved-tactics" onchange="loadTactic()">
+            <option value="">-- Kies een tactiek --</option>
+        </select>
+        <div style="display: flex; gap: 5px;">
+            <button class="btn btn-secondary" onclick="playReplay()">▶ Play</button>
+            <button class="btn btn-secondary" style="background:#a00;" onclick="clearTactics()">🗑️ Wis alles</button>
+        </div>
+        
+        <hr style="border-color: #444;">
+        
+        <h2>✏️ Edit Speler</h2>
+        <p style="font-size: 0.75rem; color: #aaa;">Klik eerst op een speler op het veld.</p>
+        <input type="text" id="edit-name" placeholder="Naam">
+        <input type="text" id="edit-num" placeholder="Nummer" style="margin-top: 5px;">
+        <button class="btn btn-secondary" style="margin-top: 5px;" onclick="updatePlayer()">Update Speler</button>
     </div>
 
-    <div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
-
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <img src="logo.png" alt="Logo" class="sidebar-logo">
-            <div class="sidebar-title">SV OVERVECHT<br>DE DREEF</div>
+    <div class="field-container">
+        <div class="field" id="field">
+            <div class="center-line"></div>
+            <div class="center-circle"></div>
+            <div class="penalty-area-left"></div>
+            <div class="penalty-area-right"></div>
+            <canvas id="canvas"></canvas>
+            
+            <div class="player team-a" id="p1" style="top: 45%; left: 5%;" onclick="selectPlayer('p1')">1<div class="player-label">KIEPER</div></div>
+            <div class="player team-a" id="p2" style="top: 20%; left: 25%;" onclick="selectPlayer('p1')">4<div class="player-label">VERDEDIGER</div></div>
+            <div class="player team-a" id="p3" style="top: 70%; left: 25%;" onclick="selectPlayer('p1')">3<div class="player-label">VERDEDIGER</div></div>
+            <div class="player team-a" id="p4" style="top: 45%; left: 45%;" onclick="selectPlayer('p1')">10<div class="player-label">MIDDENVELD</div></div>
+            <div class="player team-a" id="p5" style="top: 45%; left: 70%;" onclick="selectPlayer('p1')">9<div class="player-label">SPITS</div></div>
+            
+            <div class="player team-b" id="p6" style="top: 45%; left: 90%;" onclick="selectPlayer('p1')">1<div class="player-label">KIEPER</div></div>
+            <div class="player team-b" id="p7" style="top: 30%; left: 75%;" onclick="selectPlayer('p1')">2<div class="player-label">VERDEDIGER</div></div>
+            <div class="player team-b" id="p8" style="top: 60%; left: 75%;" onclick="selectPlayer('p1')">5<div class="player-label">VERDEDIGER</div></div>
         </div>
-
-        <button class="home-btn" onclick="gaNaarHome(); toggleMenu()">HOME</button>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Mannen Zaterdag <span>+</span></button>
-            <div class="team-group"><button class="team-button" onclick="laadTeam(this); toggleMenu()">Mannen 1</button></div>
-        </div>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Onder 16 & 15 <span>+</span></button>
-            <div class="team-group">
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO16-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO15-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO15-2JM</button>
-            </div>
-        </div>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Onder 14 <span>+</span></button>
-            <div class="team-group">
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO14-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO14-2</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO14-3</button>
-            </div>
-        </div>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Onder 13 & 12 <span>+</span></button>
-            <div class="team-group">
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO13-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO13-2</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO12-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO12-2</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO12-3</button>
-            </div>
-        </div>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Onder 11 <span>+</span></button>
-            <div class="team-group">
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO11-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO11-2</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO11-3</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO11-4</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO11-5</button>
-            </div>
-        </div>
-
-        <div class="sidebar-item">
-            <button class="category-btn">Onder 10 t/m 7 <span>+</span></button>
-            <div class="team-group">
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO10-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO10-2</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO9-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO9-2</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO9-3</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO8-1</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO8-2</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO8-3</button>
-                <button class="team-button" onclick="laadTeam(this); toggleMenu()">JO7-1</button>
-            </div>
-        </div>
-    </nav>
-
-    <main class="main-content">
-        <div class="container" id="main-container"></div>
-    </main>
+    </div>
 
     <script>
-        function toggleMenu() {
-            if(window.innerWidth <= 1024) {
-                document.getElementById('sidebar').classList.toggle('open');
-                document.getElementById('overlay').classList.toggle('show');
+        let selectedPlayerId = null;
+        let tacticsData = JSON.parse(localStorage.getItem('coach_tactics')) || {};
+
+        // Canvas setup voor eventuele toekomstige teken-functies
+        const canvas = document.getElementById('canvas');
+        const field = document.getElementById('field');
+        function resizeCanvas() {
+            canvas.width = field.clientWidth;
+            canvas.height = field.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // SLEPEN VAN SPELERS
+        const players = document.querySelectorAll('.player');
+        players.forEach(player => {
+            player.addEventListener('mousedown', function(e) {
+                let shiftX = e.clientX - player.getBoundingClientRect().left;
+                let shiftY = e.clientY - player.getBoundingClientRect().top;
+
+                function moveAt(pageX, pageY) {
+                    let fieldRect = field.getBoundingClientRect();
+                    let x = pageX - fieldRect.left - shiftX;
+                    let y = pageY - fieldRect.top - shiftY;
+
+                    // Binnen het veld houden
+                    x = Math.max(0, Math.min(x, fieldRect.width - player.clientWidth));
+                    y = Math.max(0, Math.min(y, fieldRect.height - player.clientHeight));
+
+                    player.style.left = (x / fieldRect.width) * 100 + '%';
+                    player.style.top = (y / fieldRect.height) * 100 + '%';
+                }
+
+                function onMouseMove(e) { moveAt(e.clientX, e.clientY); }
+                document.addEventListener('mousemove', onMouseMove);
+
+                document.onmouseup = function() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.onmouseup = null;
+                };
+            });
+
+            player.ondragstart = function() { return false; };
+        });
+
+        // SPELER SELECTEREN EN EDITEN
+        function selectPlayer(id) {
+            // Vind de geklikte player
+            const clickedPlayer = event.currentTarget;
+            selectedPlayerId = clickedPlayer.id;
+            
+            players.forEach(p => p.style.borderColor = 'white');
+            clickedPlayer.style.borderColor = 'yellow';
+            
+            document.getElementById('edit-name').value = clickedPlayer.querySelector('.player-label').innerText;
+            document.getElementById('edit-num').value = clickedPlayer.childNodes[0].textContent;
+        }
+
+        function updatePlayer() {
+            if (!selectedPlayerId) return alert('Klik eerst op een speler op het veld!');
+            const player = document.getElementById(selectedPlayerId);
+            const newName = document.getElementById('edit-name').value;
+            const newNum = document.getElementById('edit-num').value;
+            
+            player.childNodes[0].textContent = newNum;
+            player.querySelector('.player-label').innerText = newName.toUpperCase();
+        }
+
+        // TACTIEKEN OPSLAAN EN LADEN
+        function updateSelectDropdown() {
+            const select = document.getElementById('saved-tactics');
+            select.innerHTML = '<option value="">-- Kies een tactiek --</option>';
+            for (let name in tacticsData) {
+                const option = document.createElement('option');
+                option.value = name;
+                option.innerText = name;
+                select.appendChild(option);
+            }
+        }
+        updateSelectDropdown();
+
+        function saveTactic() {
+            const nameInput = document.getElementById('tactic-name').value;
+            if (!nameInput) return alert('Geef de tactiek eerst een naam!');
+            
+            let currentPositions = {};
+            players.forEach(player => {
+                currentPositions[player.id] = {
+                    top: player.style.top,
+                    left: player.style.left,
+                    num: player.childNodes[0].textContent,
+                    name: player.querySelector('.player-label').innerText
+                };
+            });
+
+            if(!tacticsData[nameInput]) tacticsData[nameInput] = [];
+            tacticsData[nameInput].push(currentPositions); // Voeg frame toe
+            
+            localStorage.setItem('coach_tactics', JSON.stringify(tacticsData));
+            updateSelectDropdown();
+            alert('Frame opgeslagen binnen tactiek: ' + nameInput);
+        }
+
+        function loadTactic() {
+            const selected = document.getElementById('saved-tactics').value;
+            if (!selected || !tacticsData[selected]) return;
+            
+            // Laad het EERSTE frame van die tactiek
+            applyFrame(tacticsData[selected][0]);
+        }
+
+        function applyFrame(frame) {
+            for (let id in frame) {
+                const p = document.getElementById(id);
+                if (p) {
+                    p.style.top = frame[id].top;
+                    p.style.left = frame[id].left;
+                    p.childNodes[0].textContent = frame[id].num;
+                    p.querySelector('.player-label').innerText = frame[id].name;
+                }
             }
         }
 
-        const homeContent = `
-            <h1 id="active-team-name">SV OVERVECHT</h1>
-            <div class="home-grid">
-                <div class="left-col">
-                    <div class="card">
-                        <div class="card-header">Over Onze Club</div>
-                        <div class="card-body">
-                            <p>SV Overvecht De Dreef is een levendige voetbalvereniging in Utrecht. Wij bieden een plek aan jong en oud voor sportiviteit en plezier.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">Club Activiteiten 2026</div>
-                        <div class="card-body">
-                            <div class="activity-item"><div class="date-badge">12<br>APR</div><div><strong>Paas-Toernooi Jeugd</strong></div></div>
-                            <div class="activity-item" style="border:0; margin:0; padding:0;"><div class="date-badge">20<br>JUN</div><div><strong>Eind-BBQ Seizoen</strong></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-col">
-                    <div class="newsletter-box">
-                        <h2>NIEUWSBRIEF</h2>
-                        <p>Blijf op de hoogte van al het clubnieuws.</p>
-                        <input type="email" placeholder="Je e-mailadres">
-                        <button class="newsletter-btn">Aanmelden</button>
-                    </div>
-                    <div class="card" style="margin-top:30px;">
-                        <div class="card-header" style="background:var(--dreef-rood);">HELP DE CLUB</div>
-                        <div class="card-body" style="text-align:center;">
-                            <p style="margin-bottom:20px; font-weight:600;">Wij zoeken nog scheidsrechters en trainers!</p>
-                            <button style="background:var(--dreef-blauw); color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:800; cursor:pointer;">MELD JE AAN</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        function gaNaarHome() {
-            document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
-            document.getElementById('main-container').innerHTML = homeContent;
+        function playReplay() {
+            const selected = document.getElementById('saved-tactics').value;
+            if (!selected || !tacticsData[selected]) return alert('Selecteer eerst een tactiek.');
+            
+            const frames = tacticsData[selected];
+            let currentFrame = 0;
+            
+            const interval = setInterval(() => {
+                applyFrame(frames[currentFrame]);
+                currentFrame++;
+                if (currentFrame >= frames.length) {
+                    clearInterval(interval);
+                }
+            }, 1000); // Speelt af met 1 seconde per frame
         }
 
-        function laadTeam(buttonElement) {
-            const teamNaam = buttonElement.innerText;
-            document.querySelectorAll('.team-button').forEach(b => b.classList.remove('active'));
-            buttonElement.classList.add('active');
-            document.getElementById('main-container').innerHTML = `
-                <h1 id="active-team-name">${teamNaam}</h1>
-                <div class="card">
-                    <div class="card-header">Team Informatie</div>
-                    <div class="card-body">
-                        <p>Informatie voor ${teamNaam} wordt hier geladen.</p>
-                    </div>
-                </div>`;
+        function clearTactics() {
+            if(confirm('Weet je zeker dat je alle tactieken wilt wissen?')) {
+                localStorage.removeItem('coach_tactics');
+                tacticsData = {};
+                updateSelectDropdown();
+            }
         }
-        window.onload = gaNaarHome;
     </script>
 </body>
 </html>
