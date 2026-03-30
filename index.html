@@ -40,10 +40,19 @@
         .sidebar-logo { width: 100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); }
         .sidebar-title { font-size: 1.5rem; text-transform: uppercase; font-weight: 800; color: var(--wit); margin-top: 15px; line-height: 1.1; }
 
+        /* DE NIEUWE SUBTIELE SPORT HOME KNOP */
         .home-btn {
-            display: flex; justify-content: center; align-items: center; width: 90%; margin: 15px auto; height: 60px;
-            background: var(--wit); color: var(--dreef-blauw); border: none; border-radius: 12px;
-            cursor: pointer; font-size: 2rem; font-weight: 800; text-transform: uppercase;
+            display: flex; justify-content: center; align-items: center; width: 90%; margin: 15px auto; height: 50px;
+            background: transparent; color: var(--wit); border: 2px solid var(--wit); border-radius: 12px;
+            cursor: pointer; font-size: 1.5rem; font-weight: 800; text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background: var(--wit);
+            color: var(--dreef-blauw);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .category-btn {
@@ -72,10 +81,9 @@
         .home-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
         .card { background: white; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 30px; }
         
-        /* FIX: Geen gaten meer tussen header en body */
         .card-header { background: var(--dreef-blauw); color: white; padding: 20px 30px; font-weight: 800; text-transform: uppercase; border-bottom: 5px solid var(--dreef-rood); margin: 0; }
         .card-body { padding: 30px; line-height: 1.6; font-size: 1.1rem; color: #333; }
-        .card-body p { margin-top: 0; margin-bottom: 15px; } /* Verwijder gat bovenin p */
+        .card-body p { margin-top: 0; margin-bottom: 15px; }
 
         .activity-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
         .date-badge { background: var(--dreef-rood); color: white; padding: 10px; border-radius: 12px; min-width: 60px; text-align: center; font-weight: 800; }
